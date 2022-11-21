@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const fs = require('fs')
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const { title } = require('process');
 app.use(express.json());
 app.use(cors());
 
@@ -26,13 +28,31 @@ app.get('/videos', function (req, res) {
     res.json(LoadVideoData());
 });
 
-app.get('/videos/:videoId', function (req, res) {
-    const foundVideo = videos.find((videos) => {
-        return videos.id === req.params.id;
+app.get('/videos/:id', function (req, res) {
+    const foundVideo = videos.find((video) => {
+        return video.id === req.params.id;
     });
     res.status(200).json(foundVideo);
 });
 
+
+app.post('/videos', function (req, res) {
+    if (req.title.video, req.description.video) {
+        let newVideo = {
+            id: uuidv4(),
+            channel: 'BrainFlix',
+            image: '',
+            title: req.title.video,
+            description: req.description.video,
+            views: '0',
+            likes: '0',
+            duration: '4:05',
+            video: 'https://project-2-api.herokuapp.com/stream',
+            timestamp: Date.now(),
+            comments: []
+        };
+    }
+});
 
 app.listen(5000, function () {
     console.log('server running at http://localhost:' + 5000)
