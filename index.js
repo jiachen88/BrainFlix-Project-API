@@ -51,6 +51,9 @@ app.post('/videos', function (req, res) {
             timestamp: Date.now(),
             comments: []
         };
+        res.status(201).send(UploadNewVideo(newVideo));
+    } else {
+        res.send('Please fill out form')
     }
 });
 
