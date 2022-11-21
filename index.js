@@ -41,7 +41,7 @@ app.post('/videos', function (req, res) {
         let newVideo = {
             id: uuidv4(),
             channel: 'BrainFlix',
-            image: '',
+            image: './public/images/Mohan-muruge.jpg',
             title: req.title.video,
             description: req.description.video,
             views: '0',
