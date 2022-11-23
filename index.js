@@ -4,6 +4,8 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const { title } = require('process');
+
+app.use(express.static('public'))
 app.use(express.json());
 app.use(cors());
 
@@ -29,6 +31,7 @@ app.get('/videos', function (req, res) {
 });
 
 app.get('/videos/:id', function (req, res) {
+    const videos = LoadVideoData();
     const foundVideo = videos.find((video) => {
         return video.id === req.params.id;
     });
@@ -37,13 +40,14 @@ app.get('/videos/:id', function (req, res) {
 
 
 app.post('/videos', function (req, res) {
-    if (req.title.video, req.description.video) {
+    // Should be req.body.title req.body.description
+    if (req.body.title, req.body.description) {
         let newVideo = {
             id: uuidv4(),
             channel: 'BrainFlix',
-            image: './public/images/Mohan-muruge.jpg',
-            title: req.title.video,
-            description: req.description.video,
+            image: 'http://localhost:5000/images/Mohan-muruge.jpg',
+            title: req.body.title,
+            description: req.body.description,
             views: '0',
             likes: '0',
             duration: '4:05',
